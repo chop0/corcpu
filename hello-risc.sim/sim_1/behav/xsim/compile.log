@@ -1,0 +1,38 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/functional_unit.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/types.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/opcodes.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/util_encoder.sv" into library xil_defaultlib
+WARNING: [VRFC 10-2502] extra semicolon in $unit (global) scope [/home/alec/hello-risc/hello-risc.srcs/sources_1/new/util_encoder.sv:39]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu_tb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu_op_decoder
+INFO: [VRFC 10-311] analyzing module alu_op_calculator
+INFO: [VRFC 10-311] analyzing module alu
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/instruction_decoder.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module instruction_format_decoder
+INFO: [VRFC 10-311] analyzing module immediate_decoder
+INFO: [VRFC 10-311] analyzing module instruction_decoder
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/LSU/lsu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module load_unit
+INFO: [VRFC 10-311] analyzing module store_unit
+INFO: [VRFC 10-311] analyzing module lsu
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipeline
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipeline_tb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/execute_stage.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module execute_stage
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/decode_stage.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module decode_stage
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/writeback_stage.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module writeback_stage
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/BU/bu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bu
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cdb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/arbiter.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module arbiter
+WARNING: [VRFC 10-3467] initial value of parameter 'N_MASTERS' is omitted [/home/alec/hello-risc/hello-risc.srcs/sources_1/new/arbiter.sv:24]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cdb_tb

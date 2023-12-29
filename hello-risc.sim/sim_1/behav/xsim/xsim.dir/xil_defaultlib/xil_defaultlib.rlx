@@ -1,0 +1,22 @@
+0.7
+2020.2
+Oct 13 2023
+20:21:30
+/home/alec/hello-risc/hello-risc.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu.sv,1702681929,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/instruction_decoder.sv,,alu;alu_op_calculator;alu_op_decoder,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu_tb.sv,1702289815,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu.sv,,alu_tb,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/BU/bu.sv,1702682090,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb.sv,,bu,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/instruction_decoder.sv,1702682022,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/LSU/lsu.sv,,immediate_decoder;instruction_decoder;instruction_format_decoder,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/opcodes.sv,1702675214,systemVerilog,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/functional_unit.sv,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/util_encoder.sv,,opcodes,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/LSU/lsu.sv,1702681043,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline.sv,,load_unit;lsu;store_unit,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/decode_stage.sv,1703815678,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/writeback_stage.sv,,decode_stage,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/execute_stage.sv,1702673728,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/decode_stage.sv,,execute_stage,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline.sv,1703400267,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline_tb.sv,,pipeline,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline_tb.sv,1702681575,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/execute_stage.sv,,pipeline_tb,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/writeback_stage.sv,1702673910,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/BU/bu.sv,,writeback_stage,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/arbiter.sv,1703811865,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb_tb.sv,,arbiter,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb.sv,1703816919,systemVerilog,,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/arbiter.sv,,cdb,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb_tb.sv,1703816966,systemVerilog,,,,cdb_tb,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/functional_unit.sv,1703815932,systemVerilog,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu_tb.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/BU/bu.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/instruction_decoder.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/LSU/lsu.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/decode_stage.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/execute_stage.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/pipeline_tb.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Pipeline/writeback_stage.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/arbiter.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb.sv;/home/alec/hello-risc/hello-risc.srcs/sources_1/new/cdb_tb.sv,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/types.sv,,$unit_functional_unit_sv_2071010661;functional_unit,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/types.sv,1702674943,systemVerilog,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/functional_unit.sv,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/Decoder/opcodes.sv,,types,,uvm,,,,,,
+/home/alec/hello-risc/hello-risc.srcs/sources_1/new/util_encoder.sv,1702431771,systemVerilog,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/functional_unit.sv,/home/alec/hello-risc/hello-risc.srcs/sources_1/new/ALU/alu_tb.sv,,instructions,,uvm,,,,,,

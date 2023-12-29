@@ -1,0 +1,25 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../hello-risc.srcs/sources_1/new/functional_unit.sv" \
+"../../../../hello-risc.srcs/sources_1/new/types.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Decoder/opcodes.sv" \
+"../../../../hello-risc.srcs/sources_1/new/util_encoder.sv" \
+"../../../../hello-risc.srcs/sources_1/new/ALU/alu_tb.sv" \
+"../../../../hello-risc.srcs/sources_1/new/ALU/alu.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Decoder/instruction_decoder.sv" \
+"../../../../hello-risc.srcs/sources_1/new/LSU/lsu.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Pipeline/pipeline.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Pipeline/pipeline_tb.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Pipeline/execute_stage.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Pipeline/decode_stage.sv" \
+"../../../../hello-risc.srcs/sources_1/new/Pipeline/writeback_stage.sv" \
+"../../../../hello-risc.srcs/sources_1/new/BU/bu.sv" \
+"../../../../hello-risc.srcs/sources_1/new/cdb.sv" \
+"../../../../hello-risc.srcs/sources_1/new/arbiter.sv" \
+"../../../../hello-risc.srcs/sources_1/new/cdb_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
