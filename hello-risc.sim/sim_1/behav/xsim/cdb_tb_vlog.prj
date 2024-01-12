@@ -1,22 +1,25 @@
 # compile verilog/system verilog design source files
 sv xil_defaultlib  \
-"../../../../hello-risc.srcs/sources_1/new/functional_unit.sv" \
-"../../../../hello-risc.srcs/sources_1/new/types.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Decoder/opcodes.sv" \
-"../../../../hello-risc.srcs/sources_1/new/util_encoder.sv" \
-"../../../../hello-risc.srcs/sources_1/new/ALU/alu_tb.sv" \
-"../../../../hello-risc.srcs/sources_1/new/ALU/alu.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Decoder/instruction_decoder.sv" \
-"../../../../hello-risc.srcs/sources_1/new/LSU/lsu.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Pipeline/pipeline.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Pipeline/pipeline_tb.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Pipeline/execute_stage.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Pipeline/decode_stage.sv" \
-"../../../../hello-risc.srcs/sources_1/new/Pipeline/writeback_stage.sv" \
-"../../../../hello-risc.srcs/sources_1/new/BU/bu.sv" \
-"../../../../hello-risc.srcs/sources_1/new/cdb.sv" \
-"../../../../hello-risc.srcs/sources_1/new/arbiter.sv" \
-"../../../../hello-risc.srcs/sources_1/new/cdb_tb.sv" \
+"../../../../src/types.sv" \
+"../../../../src/util_encoder.sv" \
+"../../../../tests/synchronous_fifo_tb.sv" \
+"../../../../tests/cpu_tb.sv" \
+"../../../../src/register_file/register_file.sv" \
+"../../../../src/ifu/IFU.sv" \
+"../../../../src/reservation_station/reservation_station.sv" \
+"../../../../src/cdb/cdb.sv" \
+"../../../../src/lsu/lsu.sv" \
+"../../../../src/alu/alu.sv" \
+"../../../../src/bu/bu.sv" \
+"../../../../src/memory/memory.sv" \
+"../../../../src/cpu/cpu.sv" \
+"../../../../src/instruction_decoder/instruction_decoder.sv" \
+"../../../../src/synchronous_fifo/synchronous_fifo.sv" \
+"../../../../src/frontend/frontend.sv" \
+"../../../../src/alu/alu_behavioural.sv" \
+"../../../../src/alu/alu_tb.sv" \
+"../../../../src/cdb/cdb_tb.sv" \
+"../../../../src/cdb/cdb_behavioural.sv" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

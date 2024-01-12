@@ -3,76 +3,59 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="cpu_tb_behav.wdb" id="1">
+      <db_ref path="synchronous_fifo_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_types_sv_1495469019 " />
-            <top_module name="cpu_tb" />
             <top_module name="glbl" />
-            <top_module name="instructions" />
-            <top_module name="types" />
+            <top_module name="synchronous_fifo_tb" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="12,990 ps"></ZoomStartTime>
-      <ZoomEndTime time="13,002 ps"></ZoomEndTime>
-      <Cursor1Time time="13,000 ps"></Cursor1Time>
+      <ZoomStartTime time="0 ps"></ZoomStartTime>
+      <ZoomEndTime time="21 ps"></ZoomEndTime>
+      <Cursor1Time time="0 ps"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="253"></NameColumnWidth>
-      <ValueColumnWidth column_width="126"></ValueColumnWidth>
+      <ValueColumnWidth column_width="118"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="13" />
-   <wvobject type="array" fp_name="/cpu_tb/pc">
-      <obj_property name="ElementShortName">pc[63:0]</obj_property>
-      <obj_property name="ObjectShortName">pc[63:0]</obj_property>
+   <WVObjectSize size="8" />
+   <wvobject type="array" fp_name="/synchronous_fifo_tb/cycle_inputs">
+      <obj_property name="ElementShortName">cycle_inputs[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cycle_inputs[3:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/cpu_tb/clk">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <wvobject type="array" fp_name="/synchronous_fifo_tb/test_vector">
+      <obj_property name="ElementShortName">test_vector[23:0]</obj_property>
+      <obj_property name="ObjectShortName">test_vector[23:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/cpu_tb/rst">
-      <obj_property name="ElementShortName">rst</obj_property>
-      <obj_property name="ObjectShortName">rst</obj_property>
+   <wvobject type="array" fp_name="/synchronous_fifo_tb/dut/data_out">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">data_out[1:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[1:0]</obj_property>
+      <obj_property name="label">DUT data_out</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/cpu_tb/dut/d_active">
-      <obj_property name="ElementShortName">d_active</obj_property>
-      <obj_property name="ObjectShortName">d_active</obj_property>
+   <wvobject type="logic" fp_name="/synchronous_fifo_tb/dut/full">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">full</obj_property>
+      <obj_property name="ObjectShortName">full</obj_property>
+      <obj_property name="label">DUT Full</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/cpu_tb/dut/e_active">
-      <obj_property name="ElementShortName">e_active</obj_property>
-      <obj_property name="ObjectShortName">e_active</obj_property>
+   <wvobject type="logic" fp_name="/synchronous_fifo_tb/dut/empty">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">empty</obj_property>
+      <obj_property name="ObjectShortName">empty</obj_property>
+      <obj_property name="label">dut empty</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/cpu_tb/dut/w_active">
-      <obj_property name="ElementShortName">w_active</obj_property>
-      <obj_property name="ObjectShortName">w_active</obj_property>
+   <wvobject type="array" fp_name="/synchronous_fifo_tb/behavioural/data_out">
+      <obj_property name="ElementShortName">data_out[1:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[1:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu_tb/dut/de_rs1">
-      <obj_property name="ElementShortName">de_rs1[63:0]</obj_property>
-      <obj_property name="ObjectShortName">de_rs1[63:0]</obj_property>
+   <wvobject type="logic" fp_name="/synchronous_fifo_tb/behavioural/full">
+      <obj_property name="ElementShortName">full</obj_property>
+      <obj_property name="ObjectShortName">full</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu_tb/dut/de_rs2">
-      <obj_property name="ElementShortName">de_rs2[63:0]</obj_property>
-      <obj_property name="ObjectShortName">de_rs2[63:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu_tb/dut/de_imm">
-      <obj_property name="ElementShortName">de_imm[63:0]</obj_property>
-      <obj_property name="ObjectShortName">de_imm[63:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu_tb/dut/de_instruction">
-      <obj_property name="ElementShortName">de_instruction[31:0]</obj_property>
-      <obj_property name="ObjectShortName">de_instruction[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu_tb/dut/ew_writeback_value">
-      <obj_property name="ElementShortName">ew_writeback_value[63:0]</obj_property>
-      <obj_property name="ObjectShortName">ew_writeback_value[63:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu_tb/dut/ew_instruction">
-      <obj_property name="ElementShortName">ew_instruction[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ew_instruction[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/cpu_tb/dut/clk">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <wvobject type="logic" fp_name="/synchronous_fifo_tb/behavioural/empty">
+      <obj_property name="ElementShortName">empty</obj_property>
+      <obj_property name="ObjectShortName">empty</obj_property>
    </wvobject>
 </wave_config>
