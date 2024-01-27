@@ -38,61 +38,65 @@ function operation_specification decode_instruction(input bit [31:0] instruction
     automatic bit [4:0] rs2 = instruction[24:20];
 
     case (format)
-        R_FORMAT : begin
-        	decode_instruction.spec.R.funct7 = instruction[31:25];
-        	decode_instruction.spec.R.rs2 = rs2;
-        	decode_instruction.spec.R.rs1 = rs1;
-        	decode_instruction.spec.R.funct3 = funct3;
-        	decode_instruction.spec.R.rd = rd;
-		end
+        R_FORMAT : decode_instruction = '{
+        	encoding: format,
+        	opcode: opcode,
+        	rs1: rs1,
+        	funct3: funct3,
+        	rs2: rs2,
+        	rd: rd,
+        	funct7: instruction[31:25],
+        	imm: 'X
+        };
 
-        I_FORMAT : begin
-			decode_instruction.spec.I.imm = instruction[31:20];
-			decode_instruction.spec.I.rs1 = rs1;
-			decode_instruction.spec.I.funct3 = funct3;
-			decode_instruction.spec.I.rd = rd;
-		end
+        I_FORMAT : decode_instruction = '{
+        	encoding: format,
+            opcode: opcode,
+			rs1: rs1,
+			funct3: funct3,
+			rs2: 'X,
+			rd: rd,
+			funct7: 'X,
+			imm: instruction[31:20]
+		};
 
-        S_FORMAT : begin
-			decode_instruction.spec.SB.imm = { instruction[31:25] , instruction[11:7] };
-			decode_instruction.spec.SB.rs2 = rs2;
-			decode_instruction.spec.SB.rs1 = rs1;
-			decode_instruction.spec.SB.funct3 = funct3;
-		end
+        S_FORMAT : decode_instruction = '{
+        	encoding: format,
+            opcode: opcode,
+			rs1: rs1,
+			funct3: funct3,
+			rs2: rs2,
+			rd: 'X,
+			funct7: 'X,
+			imm: { instruction[31:25] , instruction[11:7] }
+		};
 
-        B_FORMAT : begin
-        	decode_instruction.spec.SB.imm = { instruction[31] , instruction[7] , instruction[30:25] , instruction[11:8], 1'b0 };
-			decode_instruction.spec.SB.rs2 = rs2;
-			decode_instruction.spec.SB.rs1 = rs1;
-			decode_instruction.spec.SB.funct3 = funct3;
-		end
+        B_FORMAT : decode_instruction = '{
+        	encoding: format,
+            opcode: opcode,
+			rs1: rs1,
+			funct3: funct3,
+			rs2: rs2,
+			rd: 'X,
+			funct7: 'X,
+			imm: { instruction[31] , instruction[7] , instruction[30:25] , instruction[11:8], 1'b0 }
+		};
     endcase
-
-	decode_instruction.encoding = format;
-	decode_instruction.opcode = opcode;
-
 endfunction : decode_instruction
 
-module instruction_issuer(
-        input logic clk,
-        input logic rst,
-
+module instruction_decoder(
         input [31:0] instruction,
-        input instruction_valid,
 
-        output issue_bus issue_bus
+        output logic [2:0] rs_id,
+        output operation_specification op
 );
+	e_instruction_format format;
+
     instruction_format_decoder fmt_decoder(
         .instruction ( instruction ),
-        .format ( ),
-        .unit ( )
+        .format ( format ),
+        .unit ( rs_id )
     );
 
-    operation_specification op = decode_instruction(instruction, fmt_decoder.format);
-
-    assign issue_bus = '{
-        valid: instruction_valid,
-        rs_id: fmt_decoder.unit,
-        op: op
-    };
+    assign op = decode_instruction(instruction, format);
 endmodule

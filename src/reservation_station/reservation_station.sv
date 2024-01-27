@@ -2,177 +2,115 @@
 
 import types::*;
 
-	module reservation_station
+module reservation_station
 	#(parameter int DATA_WIDTH, int RS_ID)
 	(
 		input logic clk,
 		input logic rst,
+
+		input register read1_value_i, read2_value_i,
+
+		output logic busy_o, // us->ifu
 		
-		// selected when DoIssue
-		output logic poll_write_enable,
-		output logic [4:0] poll_write,
-		output register poll_write_value,
+		input logic issue_en_i,
+		input operation_specification issue_op_i,
 		
-		// selected when DoIssue
-		output logic read1_enable, read2_enable,
-		output logic [4:0] read1, read2,
-		input register read1_value, read2_value,
+		input logic unit_done_i,
 		
-		// selected when DoRetire
-		output logic retire_write_enable,
-		output logic [4:0] retire_write,
-		output register retire_write_value,
+		output logic resolved_op1_o, // us->unit
+		output logic resolved_op2_o, // us->unit
 
-		output logic Busy, // us->ifu
-		output logic ResolvedOp1, // us->unit
-		output logic ResolvedOp2, // us->unit
+		input logic bcast_en_i, // cdb arbiter->us
+		input logic [DATA_WIDTH-1:0] bcast_data_i, // cdb arbiter->us
+		input e_functional_unit bcast_rs_i, // cdb arbiter->us,
+		
+		input logic retire_i,
+		output logic retirement_ready_o,
+		
+		output operation_specification current_op_o,
 
-		input logic UnitDone, // unit->us
-
-		input operation_specification issue_op, // ifu->us
-
-		input logic CDB_valid, // cdb arbiter->us
-		input logic [DATA_WIDTH-1:0] CDB_result, // cdb arbiter->us
-		input logic [2:0] CDB_rs_id, // cdb arbiter->us
-
-		input logic DoIssue,
-		input logic DoRetire,
-		input logic IsCancelled
+		output logic [DATA_WIDTH - 1:0] op1_value_o, op2_value_o
 	);
 	enum {
 		ISSUE,
 		WAITING
 	} state;
 
-
-	assign ReadyToRetire = state == WAITING && UnitDone;
-	assign Busy = DoIssue || state != ISSUE;
-
-	logic op_has_rd;
-	logic [4:0] op_rd;
-
-	register j, k;
-
-	always_comb begin
-		assert (!DoRetire || state == WAITING);
-		assert (!DoIssue || state == ISSUE);
-		assert (!IsCancelled || state == WAITING);
+	assign retirement_ready_o = state == WAITING && unit_done_i;
+	assign busy_o = state != ISSUE;
 	
-		// if instruction I_r computing register R is retired at the same time another instruction I_i computing R is issued, the
-		// RS retiring I_r still broadcasts to the CDB, so any units (whose instructions must've been issued before I_i)
-		// get the old value of R they needed.  I_r's value of R never gets written back to the register file;  I_i should be able
-		// to mark R as virtual.  Therefore, poll_write must take precedence over retire_write.
-		unique casex ({ state, DoIssue, DoRetire })
-			{ISSUE, 1'b1, 1'bx} : begin
-				poll_write_enable = issue_op.has_rd;
-				poll_write = issue_op.rd;
-				poll_write_value.is_virtual = 1;
-				poll_write_value.data.rs_id = RS_ID;
-
-				retire_write_enable = 'X;
-				retire_write = 'X;
-				retire_write_value = '{ default: 'X };
-
-				read1_enable = issue_op.has_rs1;
-				read2_enable = issue_op.has_rs2;
-				read1 = issue_op.rs1;
-				read2 = issue_op.rs2;
-			end
-
-			{WAITING, 1'bx, 1'b1} : begin
-				assert (ReadyToRetire);
-				
-				poll_write_enable = 'X;
-				poll_write = 'X;
-				poll_write_value = '{ default: 'X };
-
-				assert (op_has_rd == (CDB_valid && CDB_rs_id == RS_ID));
-				// race:  instruction cancelled on the same cycle that the instruction was selected to be retired.  do not write back.
-				retire_write_enable = IsCancelled ? 1'b0 : op_has_rd;
-				retire_write = op_rd;
-				retire_write_value.is_virtual = 1'b0;
-				retire_write_value.data.value = CDB_result;
-
-				read1_enable = 'X;
-				read2_enable = 'X;
-				read1 = 'X;
-				read2 = 'X;
-			end
-			
-			default : begin
-				poll_write_enable = 'X;
-				poll_write = 'X;
-				poll_write_value = '{ default: 'X };
-
-				retire_write_enable = 'X;
-				retire_write = 'X;
-				retire_write_value = '{ default: 'X };
-
-				read1_enable = 'X;
-				read2_enable = 'X;
-				read1 = 'X;
-				read2 = 'X;
-			end		
-		endcase
-	end
+	register j, k;
+	
+	assign op1_value_o = j.data.value;
+	assign op2_value_o = k.data.value;
 
 	always_ff @(posedge clk) begin
-		if (rst)
+		if (rst) begin
 			state <= ISSUE;
+			j.is_virtual <= 'X;
+			k.is_virtual <= 'X;
+			j.data.value <= 'X;
+			k.data.value <= 'X;
+
+			resolved_op1_o <= 1'b0;
+			resolved_op2_o <= 1'b0;
+
+			current_op_o <= '{ encoding: e_instruction_format'('X), default: 'X };
+		end
 		else case (state)
-			ISSUE : if (DoIssue) begin
+			ISSUE : if (issue_en_i) begin
 				// if an instruction computing one of our operands is currently being retired, we need to catch that now, since it'll be gone by
 				// the next cycle
-				if (issue_op.has_rs1) begin
-					if (read1_value.is_virtual && CDB_valid && read1_value.data.rs_id == CDB_rs_id) begin
+				if (has_rs1(issue_op_i.encoding)) begin
+					if (read1_value_i.is_virtual && bcast_en_i && read1_value_i.data.rs_id == bcast_rs_i) begin
 						j.is_virtual <= 1'b0;
-						j.data.value <= CDB_result;
+						j.data.value <= bcast_data_i;
 					end else begin
-						j <= read1_value;
+						j <= read1_value_i;
 					end
 				end else j.is_virtual <= 1'b0;
 
-				if (issue_op.has_rs2) begin
-					if (read2_value.is_virtual && CDB_valid && read2_value.data.rs_id == CDB_rs_id) begin
+				if (has_rs2(issue_op_i.encoding)) begin
+					if (read2_value_i.is_virtual && bcast_en_i && read2_value_i.data.rs_id == bcast_rs_i) begin
 						k.is_virtual <= 1'b0;
-						k.data.value <= CDB_result;
+						k.data.value <= bcast_data_i;
 					end else begin
-						k <= read2_value;
+						k <= read2_value_i;
 					end
 				end else k.is_virtual <= 1'b0;
-				
-				ResolvedOp1 <= !issue_op.has_rs1 || !read1_value.is_virtual || (CDB_valid && read1_value.data.rs_id == CDB_rs_id);
-				ResolvedOp2 <= !issue_op.has_rs2 || !read2_value.is_virtual || (CDB_valid && read2_value.data.rs_id == CDB_rs_id);
 
-				op_has_rd = issue_op.has_rd;
-				op_rd = issue_op.rd;
+				
+				resolved_op1_o <= !has_rs1(issue_op_i.encoding) || !read1_value_i.is_virtual || (bcast_en_i && read1_value_i.data.rs_id == bcast_rs_i);
+				resolved_op2_o <= !has_rs2(issue_op_i.encoding) || !read2_value_i.is_virtual || (bcast_en_i && read2_value_i.data.rs_id == bcast_rs_i);
+
+				current_op_o <= issue_op_i;
 
 				state <= WAITING;
 			end
 		
 			WAITING : begin
-				if (CDB_valid) begin
-					if (j.is_virtual && j.data.rs_id == CDB_rs_id) begin
-						assert (!ResolvedOp1);
+				if (bcast_en_i) begin
+					if (j.is_virtual && j.data.rs_id == bcast_rs_i) begin
+						assert (!resolved_op1_o);
 					
 						j.is_virtual <= 1'b0;
-						j.data.value <= CDB_result;
-						ResolvedOp1 <= 1'b1;
+						j.data.value <= bcast_data_i;
+						resolved_op1_o <= 1'b1;
 					end
 
-					if (k.is_virtual && k.data.rs_id == CDB_rs_id) begin
-						assert (!ResolvedOp2);
+					if (k.is_virtual && k.data.rs_id == bcast_rs_i) begin
+						assert (!resolved_op2_o);
 					
 						k.is_virtual <= 1'b0;
-						k.data.value <= CDB_result;
-						ResolvedOp2 <= 1'b1;
+						k.data.value <= bcast_data_i;
+						resolved_op2_o <= 1'b1;
 					end
 				end
 				
-				if (DoRetire || IsCancelled) begin // sometimes, BOTH of these may be true -- this doesn't need special handling here, but it is explicitly dealt with in the combinational logic
+				if (retire_i) begin
 					state <= ISSUE;
-					ResolvedOp1 <= 1'b0;
-					ResolvedOp2 <= 1'b0;
+					resolved_op1_o <= 1'b0;
+					resolved_op2_o <= 1'b0;
 				end
 			end
 		endcase

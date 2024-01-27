@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="ifu_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_types_sv_2459038089 " />
+            <top_module name="glbl" />
+            <top_module name="ifu_tb" />
+            <top_module name="types" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="27.116 ns"></ZoomStartTime>
+      <ZoomEndTime time="53.377 ns"></ZoomEndTime>
+      <Cursor1Time time="49.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="261"></NameColumnWidth>
+      <ValueColumnWidth column_width="104"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="15" />
+   <wvobject type="logic" fp_name="/ifu_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ifu_tb/ifu_behavioural/pc">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">pc[63:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[63:0]</obj_property>
+      <obj_property name="label">Behav pc</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ifu_tb/dut/queue/head">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">head[31:0]</obj_property>
+      <obj_property name="ObjectShortName">head[31:0]</obj_property>
+      <obj_property name="label">DUT fetch head</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/dut/queue/empty">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">empty</obj_property>
+      <obj_property name="ObjectShortName">empty</obj_property>
+      <obj_property name="label">DUT queue empty?</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ifu_tb/ifu_behavioural/fetch_insn_o">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">fetch_insn_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">fetch_insn_o[31:0]</obj_property>
+      <obj_property name="label">Behav. curr</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/dut/branch_in_pipeline">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">branch_in_pipeline</obj_property>
+      <obj_property name="ObjectShortName">branch_in_pipeline</obj_property>
+      <obj_property name="label">Branch in DUT pipeline</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/ifu_behavioural/is_stalling">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">is_stalling</obj_property>
+      <obj_property name="ObjectShortName">is_stalling</obj_property>
+      <obj_property name="label">Behav. stalling?</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/dut/fetch_ready_o">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">fetch_ready_o</obj_property>
+      <obj_property name="ObjectShortName">fetch_ready_o</obj_property>
+      <obj_property name="label">DUT fetch ready?</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/ifu_behavioural/fetch_ready_o">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">fetch_ready_o</obj_property>
+      <obj_property name="ObjectShortName">fetch_ready_o</obj_property>
+      <obj_property name="label">Behav. fetch ready?</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/dut/queue_reset">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">queue_reset</obj_property>
+      <obj_property name="ObjectShortName">queue_reset</obj_property>
+      <obj_property name="label">DUT queue flush</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/instruction_poll_i">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">instruction_poll_i</obj_property>
+      <obj_property name="ObjectShortName">instruction_poll_i</obj_property>
+      <obj_property name="label">Poll?</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ifu_tb/bcast_valid_i">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">bcast_valid_i</obj_property>
+      <obj_property name="ObjectShortName">bcast_valid_i</obj_property>
+      <obj_property name="label">bcast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ifu_tb/bcast_rs_i">
+      <obj_property name="ElementShortName">bcast_rs_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">bcast_rs_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ifu_tb/bcast_value_i">
+      <obj_property name="ElementShortName">bcast_value_i[63:0]</obj_property>
+      <obj_property name="ObjectShortName">bcast_value_i[63:0]</obj_property>
+   </wvobject>
+</wave_config>

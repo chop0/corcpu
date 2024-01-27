@@ -2,35 +2,18 @@
 
 
 module bu #(parameter DATA_WIDTH = 64) (
-	input clk,
-	input rst,
+	input logic [DATA_WIDTH-1:0] lhs,
+	input logic [DATA_WIDTH-1:0] rhs,
 
-	output logic [4:0] write1,
-	output logic [4:0] write2,
+	input logic lhs_valid,
+	input logic rhs_valid,
 
-	output logic [4:0] read1,
-	output logic [4:0] read2,
+	input operation_specification op_spec,
 
-	output logic write1_enable, write2_enable, read1_enable, read2_enable,
+	input logic [DATA_WIDTH-1:0] pc,
 
-	output register write1_value,
-	output register write2_value,
-	input register read1_value,
-	input register read2_value,
-
-	issue_bus issue_bus,
-	
-	input logic Retire,
-
-	input logic CDB_valid,
-	input logic [DATA_WIDTH-1:0] CDB_result,
-	input logic [2:0] CDB_rs_id,
-
-	output logic result_valid,
 	output logic [DATA_WIDTH-1:0] result,
-
-	output logic InstructionPolled,
-	output logic Busy
+	output logic result_valid
 );
 	typedef enum {
 		EQ,
@@ -41,36 +24,6 @@ module bu #(parameter DATA_WIDTH = 64) (
 		GEU
 	} CMP_OP;
 
-	reservation_station #(DATA_WIDTH, BU) rs(
-		.clk ( clk ),
-		.rst ( rst ),
-
-		.write1 ( write1 ),
-		.write2 ( write2 ),
-		.write1_enable ( write1_enable ),
-		.write2_enable ( write2_enable ),
-		.write1_value ( write1_value ),
-		.write2_value ( write2_value ),
-
-		.read1 ( read1 ),
-		.read2 ( read2 ),
-		.read1_enable ( read1_enable ),
-		.read2_enable ( read2_enable ),
-		.read1_value ( read1_value ),
-		.read2_value ( read2_value ),
-
-		.issue ( issue_bus ),
-
-		.InstructionPolled ( InstructionPolled ),
-		.Busy ( Busy ),
-
-		.Retire ( Retire ),
-
-		.CDB_valid ( CDB_valid ),
-		.CDB_result ( CDB_result ),
-		.CDB_rs_id ( CDB_rs_id )
-	);
-
 	function CMP_OP decode(bit [2:0] funct3);
 		case (funct3)
 			3'h0: return EQ;
@@ -79,6 +32,7 @@ module bu #(parameter DATA_WIDTH = 64) (
 			3'h5: return GE;
 			3'h6: return LTU;
 			3'h7: return GEU;
+			default: return CMP_OP'('X);
 		endcase
 	endfunction
 
@@ -86,13 +40,13 @@ module bu #(parameter DATA_WIDTH = 64) (
 		case (op)
 			EQ: return a == b;
 			NE: return a != b;
-			LT: return a < b;
-			GE: return a >= b;
+			LT: return $signed(a) < $signed(b);
+			GE: return $signed(a) >= $signed(b);
 			LTU: return a < b;
 			GEU: return a >= b;
 		endcase
 	endfunction
 
-	logic [DATA_WIDTH-1:0] result = compare(rs.j.data.value, rs.k.data.value, decode(rs.Op.spec.R.funct3));
-	assign result_valid = rs.Busy && !rs.j.is_virtual && !rs.k.is_virtual;
-endmodule
+	assign result = compare(lhs, rhs, decode(op_spec.funct3)) ? pc + op_spec.imm : pc + 4;
+	assign result_valid = lhs_valid && rhs_valid;
+endmodule : bu

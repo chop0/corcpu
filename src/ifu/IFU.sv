@@ -6,66 +6,66 @@
 //
 // Created : 31. Dec 2023 12:47 AM
 //-------------------------------------------------------------------
-module IFU #(parameter ADDRESS_WIDTH = 64) (
+module ifu #(parameter ADDRESS_WIDTH = 64) (
 	input logic clk,
 	input logic rst,
 
-	input logic instruction_poll,
+	input logic instruction_poll_i,
 
-	input logic CDB_valid,
-	input logic [ADDRESS_WIDTH-1:0] CDB_result,
-	input logic [2:0] CDB_rs_id,
+	input logic bcast_valid_i,
+	input logic [ADDRESS_WIDTH-1:0] bcast_value_i,
+	input e_functional_unit bcast_rs_i,
 
-	output logic [31:0] instruction,
-	output logic instruction_valid
+	output logic fetch_ready_o,
+	output logic [31:0] fetch_insn_o,
+
+	output logic [ADDRESS_WIDTH - 1:0] imem_load_addr_o,
+	output logic imem_load_en_o,
+	input logic [31:0] imem_load_insn_i,
+	input logic imem_load_busy_i,
+	input logic imem_load_rdy_i
 );
-	logic [ADDRESS_WIDTH - 1:0] fetch_pc;
+	logic [ADDRESS_WIDTH - 1:0] insn_load_pc;
+	logic branch_in_pipeline;
 
-	logic branch_in_pipeline = 0;
-	logic stall = branch_in_pipeline || queue.full;
+	logic empty, full;
+	logic queue_reset;
 
 	synchronous_fifo #(8, 32) queue (
 		.clk ( clk ),
-		.rst ( rst ),
+		.rst ( queue_reset ), // clear queue on branch
 
-		.push ( !stall ),
-		.poll ( instruction_poll ),
+		.push ( imem_load_rdy_i ),
+		.poll ( instruction_poll_i ),
 
-		.data_in ( instruction )
+		.data_in ( imem_load_insn_i ),
+
+		.head ( fetch_insn_o ),
+		.tail ( ),
+		.empty ( empty ),
+		.full ( full )
 	);
 
-	assign instruction_valid = !queue.empty;
+	assign queue_reset = rst || (bcast_valid_i && bcast_rs_i == BU);
+	assign fetch_ready_o = !rst && !empty && !queue_reset;
 
-	memory mem (
-		.clk ( clk ),
-		.rst ( rst ),
+	assign imem_load_addr_o = insn_load_pc;
+    assign imem_load_en_o = !(branch_in_pipeline || full) && !imem_load_busy_i;
 
-		.write ( 1'b0 ),
-		.addr ( fetch_pc ),
-		.data_in ( 'h0 ),
-		.data_out ( instruction )
-	);
-
-	always_ff @(posedge clk) begin
-		if (rst) begin
-			queue.becomes_empty();
-			fetch_pc <= 'h0;
-		end
-
-		else begin
-			if (!stall) begin
-				fetch_pc <= fetch_pc + 'h4;
-				if (instruction[6:0] == 1100011) begin
-					branch_in_pipeline <= 1;
-				end
-			end
-
-			if (CDB_valid && CDB_rs_id == BU) begin
-				assert (branch_in_pipeline);
-
-				branch_in_pipeline <= 0;
-				fetch_pc <= CDB_result;
-			end
-		end
+	always_ff @(posedge clk) if (rst) begin
+		branch_in_pipeline <= 0;
+		insn_load_pc <= 'b0;
 	end
-endmodule : IFU
+
+	always_ff @(posedge clk) if (!rst && imem_load_rdy_i) begin
+		if (imem_load_insn_i[6:0] == 7'b1100011)
+			branch_in_pipeline <= 1;
+		else
+			insn_load_pc <= insn_load_pc + 'h4;
+	end
+
+	always_ff @(posedge clk) if (!rst && bcast_valid_i && bcast_rs_i == BU) begin
+		branch_in_pipeline <= 0;
+		insn_load_pc <= bcast_value_i;
+	end
+endmodule : ifu

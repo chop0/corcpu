@@ -1,27 +1,27 @@
 `timescale 1ns / 1ps
 import types::*;
 
-// on contention, write1 wins
 module register_file #(parameter DATA_WIDTH = 64) (
-		wire clk,
-		wire rst,
-		
-		input logic [4:0] write1,
-		input logic [4:0] write2,
-		input logic [4:0] read1,
-		input logic [4:0] read2,
-		input logic write1_enable, write2_enable, read1_enable, read2_enable,
-		
-		input register write1_value,
-		input register write2_value,
-		output register read1_value,
-		output register read2_value
+		input logic clk,
+		input logic rst,
+
+		input logic issue_wr_en_i,
+		input logic [4:0] issue_dst_i,
+		input e_functional_unit issue_rs_i,
+
+		input logic bcast_valid_i,
+		input logic [DATA_WIDTH - 1:0] bcast_value_i,
+		input e_functional_unit bcast_rs_i,
+
+		input logic [4:0] read_reg1_i, read_reg2_i,
+
+		output register read_value1_o, read_value2_o
 	);
 
-	register registers [31:0];
+	register registers [32];
 
-	assign read1_value = registers[read1];
-	assign read2_value = registers[read2];
+	assign read_value1_o = registers[read_reg1_i];
+	assign read_value2_o = registers[read_reg2_i];
 
 	always_ff @(posedge(clk)) begin
 		if (rst)
@@ -30,10 +30,19 @@ module register_file #(parameter DATA_WIDTH = 64) (
 				registers[i].data.value <= 0;
 			end
 		else begin
-			if (write1_enable)
-				registers[write1] <= write1_value;
-			if (write2_enable && (!write1_enable || write1 != write2))
-				registers[write2] <= write2_value;
+			if (bcast_valid_i) begin
+				for (int i = 0; i < 32; i++) begin
+					if (registers[i].is_virtual && registers[i].data.rs_id == bcast_rs_i) begin
+						registers[i].is_virtual <= 1'b0;
+						registers[i].data.value <= bcast_value_i;
+					end
+				end
+			end
+
+			if (issue_wr_en_i) begin
+				registers[issue_dst_i].is_virtual <= 1'b1;
+				registers[issue_dst_i].data.rs_id <= issue_rs_i;
+			end
 		end
 	end
 
