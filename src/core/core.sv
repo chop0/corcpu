@@ -33,14 +33,23 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 	output logic [FETCH_WIDTH - 1:0] dmem_wr_data_o
 );
 	logic [15:0]             issued_instruction_cnt;
-	
+		
+	logic [$clog2(MULTI_ISSUE):0] fetch_queue_size;
+	e_functional_unit             fetch_queue_units[MULTI_ISSUE];
+	operation_specification       fetch_queue_ops[MULTI_ISSUE];
+	e_instruction_format          fetch_queue_fmt[MULTI_ISSUE];
+	logic [4:0]                   fetch_queue_rd[MULTI_ISSUE];
+	logic [4:0]                   fetch_queue_rs1[MULTI_ISSUE];
+	logic [4:0]                   fetch_queue_rs2[MULTI_ISSUE];	
+
 	logic                    issue_en [MULTI_ISSUE];
 	logic [$clog2(MULTI_ISSUE):0] issue_cnt;
 	operation_specification  issue_op[MULTI_ISSUE];
 
+	logic                    issue_mark_virtual[MULTI_ISSUE];
 	logic                    issue_has_rd[MULTI_ISSUE];
 	logic [4:0]				 issue_rd [MULTI_ISSUE];
-	e_functional_unit        issue_rs[MULTI_ISSUE];
+	e_functional_unit        issue_unit[MULTI_ISSUE];
 	logic [4:0]				 issue_rs1[MULTI_ISSUE];
 	logic [4:0]				 issue_rs2[MULTI_ISSUE];	
 	register                 issue_read1_value[MULTI_ISSUE];
@@ -84,6 +93,30 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 	logic [63:0]             bu_lhs;
 	logic [63:0]             bu_rhs;
 	logic [63:0]             bu_result;
+	
+	ifu #(
+		.DATA_WIDTH ( DATA_WIDTH ), 
+		.MULTI_ISSUE ( MULTI_ISSUE )
+	) ifu (
+		.clk ( clk ),
+		.rst ( rst ),
+
+		.poll_cnt_i ( issue_cnt ),
+
+		.bcast_valid_i ( bcast_valid ),
+		.bcast_rs_i ( retire_rs ),
+		.bcast_value_i ( bcast_value ),
+
+		.rdy_cnt_o ( fetch_queue_size ),
+		.fetch_insns_o ( fetch_queue_ops ),
+		.fetch_rs_o ( fetch_queue_units ),
+
+		.imem_load_addr_o ( imem_addr_o ),
+		.imem_load_en_o ( imem_rd_en_o ),
+		.imem_load_insn_i ( imem_rd_data_i[63:32] ),
+		.imem_load_busy_i ( imem_busy_i ),
+		.imem_load_rdy_i ( imem_rdy_i )
+	);
 
 	issue_arbiter #(
 		.DATA_WIDTH ( DATA_WIDTH ),
@@ -101,18 +134,15 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 		
 		.units_busy_i ( station_busy ),
 		
-		.imem_busy_i ( imem_busy_i ),
-		.imem_rdy_i ( imem_rdy_i ),
-		.imem_rd_data_i ( imem_rd_data_i ),
-		
-		.imem_rd_en_o ( imem_rd_en_o ),
-		.imem_addr_o ( imem_addr_o ),
+		.queue_rdy_cnt_i ( fetch_queue_size ),
+		.queue_rd_i ( fetch_queue_rd ),
+		.queue_rs1_i ( fetch_queue_rs1 ),
+		.queue_rs2_i ( fetch_queue_rs2 ),
+		.queue_insn_fmt_i ( fetch_queue_fmt ),
+		.queue_stations_i ( fetch_queue_units ),
 		
 		.issue_en_o ( issue_en ),
-		.issue_rd_o ( issue_rd ),
-		.issue_has_rd_o ( issue_has_rd ),
-		.issue_ops_o ( issue_op ),
-		.issue_stations_o ( issue_rs )
+		.issue_cnt_o ( issue_cnt )
 	);
 	
 	register_file #(
@@ -122,9 +152,9 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 		.clk ( clk ),
 		.rst ( rst ),
 
-		.issue_wr_en_i ( issue_has_rd ),
+		.issue_wr_en_i ( issue_mark_virtual ),
 		.issue_dst_i ( issue_rd ),
-		.issue_rs_i ( issue_rs ),
+		.issue_rs_i ( issue_unit ),
 
 		.bcast_valid_i ( bcast_valid ),
 		.bcast_rs_i ( retire_rs ),
@@ -152,11 +182,13 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 		operation_specification issue_op_spec_``ID;\
 		register issue_read1_value_``ID, issue_read2_value_``ID; \
 		always_comb begin \
+			issue_read1_value_``ID = '{ default: 'X }; \
+			issue_read2_value_``ID = '{ default: 'X }; \
 			issue_en_``ID = 1'b0; \
 			issue_op_spec_``ID = '{encoding: e_instruction_format'('X), default: 'X}; \
 			\
 			for (int i = 0; i < MULTI_ISSUE; i++) \
-				if (issue_en[i] && issue_rs[i] == ID) begin \
+				if (issue_en[i] && issue_unit[i] == ID) begin \
 					issue_en_``ID = 1'b1; \
 					issue_op_spec_``ID = issue_op[i]; \
 					issue_read1_value_``ID = issue_read1_value[i]; \
@@ -251,21 +283,29 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 		.result ( bu_result ),
 		.result_valid ( bu_done )
 	);
+	
+	assign done_o = issued_instruction_cnt >= max_instructions_i && station_busy == 'b0;
 
 	assign unit_results[LSU] = lsu_result;
 	assign unit_results[ALU] = alu_result;
 	assign unit_results[BU]  = bu_result;
-
-	assign done_o = issued_instruction_cnt >= max_instructions_i && station_busy == 'b0;
 	
-	always_comb begin
-		issue_cnt = 0;
-		
+	assign issue_op = fetch_queue_ops;
+	assign issue_unit = fetch_queue_units;
+	assign issue_rd = fetch_queue_rd;
+	
+	assign issue_rs1 = fetch_queue_rs1;
+	assign issue_rs2 = fetch_queue_rs2;	
+	
+	always_comb begin		
 		for (int i = 0; i < MULTI_ISSUE; i++) begin
-			issue_rs1[i] = issue_op[i].rs1;
-			issue_rs2[i] = issue_op[i].rs2;
-			
-			if (issue_en[i]) issue_cnt++;
+			fetch_queue_fmt[i] = fetch_queue_ops[i].encoding;
+			fetch_queue_rd[i] = fetch_queue_ops[i].rd;
+			issue_has_rd[i] = has_rd(fetch_queue_ops[i].encoding);
+			issue_mark_virtual[i] = issue_has_rd[i] && issue_en[i];
+		
+			fetch_queue_rs1[i] = issue_op[i].rs1;
+			fetch_queue_rs2[i] = issue_op[i].rs2;
 		end
 	end
 

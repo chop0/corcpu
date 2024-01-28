@@ -13,13 +13,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="7,676.534 ns"></ZoomStartTime>
-      <ZoomEndTime time="7,787.335 ns"></ZoomEndTime>
-      <Cursor1Time time="7,753.334 ns"></Cursor1Time>
+      <ZoomStartTime time="270.002 ns"></ZoomStartTime>
+      <ZoomEndTime time="403.447 ns"></ZoomEndTime>
+      <Cursor1Time time="339.441 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="341"></NameColumnWidth>
-      <ValueColumnWidth column_width="218"></ValueColumnWidth>
+      <NameColumnWidth column_width="420"></NameColumnWidth>
+      <ValueColumnWidth column_width="262"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="19" />
    <wvobject type="logic" fp_name="/tester/clk">
@@ -45,143 +45,6 @@
       <obj_property name="ElementShortName">registers[0:31]</obj_property>
       <obj_property name="ObjectShortName">registers[0:31]</obj_property>
       <obj_property name="label">DUT registers</obj_property>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[0]">
-         <obj_property name="ElementShortName">[0]</obj_property>
-         <obj_property name="ObjectShortName">[0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[1]">
-         <obj_property name="ElementShortName">[1]</obj_property>
-         <obj_property name="ObjectShortName">[1]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[2]">
-         <obj_property name="ElementShortName">[2]</obj_property>
-         <obj_property name="ObjectShortName">[2]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[3]">
-         <obj_property name="ElementShortName">[3]</obj_property>
-         <obj_property name="ObjectShortName">[3]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[4]">
-         <obj_property name="ElementShortName">[4]</obj_property>
-         <obj_property name="ObjectShortName">[4]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[5]">
-         <obj_property name="ElementShortName">[5]</obj_property>
-         <obj_property name="ObjectShortName">[5]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[6]">
-         <obj_property name="ElementShortName">[6]</obj_property>
-         <obj_property name="ObjectShortName">[6]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[7]">
-         <obj_property name="ElementShortName">[7]</obj_property>
-         <obj_property name="ObjectShortName">[7]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[8]">
-         <obj_property name="ElementShortName">[8]</obj_property>
-         <obj_property name="ObjectShortName">[8]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[9]">
-         <obj_property name="ElementShortName">[9]</obj_property>
-         <obj_property name="ObjectShortName">[9]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[10]">
-         <obj_property name="ElementShortName">[10]</obj_property>
-         <obj_property name="ObjectShortName">[10]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[11]">
-         <obj_property name="ElementShortName">[11]</obj_property>
-         <obj_property name="ObjectShortName">[11]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[12]">
-         <obj_property name="ElementShortName">[12]</obj_property>
-         <obj_property name="ObjectShortName">[12]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[13]">
-         <obj_property name="ElementShortName">[13]</obj_property>
-         <obj_property name="ObjectShortName">[13]</obj_property>
-         <wvobject type="logic" fp_name="/tester/cpu/dut/rf/registers[13].is_virtual">
-            <obj_property name="ElementShortName">.is_virtual</obj_property>
-            <obj_property name="ObjectShortName">.is_virtual</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[13].data">
-            <obj_property name="ElementShortName">.data</obj_property>
-            <obj_property name="ObjectShortName">.data</obj_property>
-            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-         </wvobject>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[14]">
-         <obj_property name="ElementShortName">[14]</obj_property>
-         <obj_property name="ObjectShortName">[14]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[15]">
-         <obj_property name="ElementShortName">[15]</obj_property>
-         <obj_property name="ObjectShortName">[15]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[16]">
-         <obj_property name="ElementShortName">[16]</obj_property>
-         <obj_property name="ObjectShortName">[16]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[17]">
-         <obj_property name="ElementShortName">[17]</obj_property>
-         <obj_property name="ObjectShortName">[17]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[18]">
-         <obj_property name="ElementShortName">[18]</obj_property>
-         <obj_property name="ObjectShortName">[18]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[19]">
-         <obj_property name="ElementShortName">[19]</obj_property>
-         <obj_property name="ObjectShortName">[19]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[20]">
-         <obj_property name="ElementShortName">[20]</obj_property>
-         <obj_property name="ObjectShortName">[20]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[21]">
-         <obj_property name="ElementShortName">[21]</obj_property>
-         <obj_property name="ObjectShortName">[21]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[22]">
-         <obj_property name="ElementShortName">[22]</obj_property>
-         <obj_property name="ObjectShortName">[22]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[23]">
-         <obj_property name="ElementShortName">[23]</obj_property>
-         <obj_property name="ObjectShortName">[23]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[24]">
-         <obj_property name="ElementShortName">[24]</obj_property>
-         <obj_property name="ObjectShortName">[24]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[25]">
-         <obj_property name="ElementShortName">[25]</obj_property>
-         <obj_property name="ObjectShortName">[25]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[26]">
-         <obj_property name="ElementShortName">[26]</obj_property>
-         <obj_property name="ObjectShortName">[26]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[27]">
-         <obj_property name="ElementShortName">[27]</obj_property>
-         <obj_property name="ObjectShortName">[27]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[28]">
-         <obj_property name="ElementShortName">[28]</obj_property>
-         <obj_property name="ObjectShortName">[28]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[29]">
-         <obj_property name="ElementShortName">[29]</obj_property>
-         <obj_property name="ObjectShortName">[29]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[30]">
-         <obj_property name="ElementShortName">[30]</obj_property>
-         <obj_property name="ObjectShortName">[30]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[31]">
-         <obj_property name="ElementShortName">[31]</obj_property>
-         <obj_property name="ObjectShortName">[31]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group152">
       <obj_property name="label">Imem</obj_property>
@@ -210,6 +73,10 @@
       <wvobject type="array" fp_name="/tester/cpu/dut_cache/imem_rd_data_o">
          <obj_property name="ElementShortName">imem_rd_data_o[63:0]</obj_property>
          <obj_property name="ObjectShortName">imem_rd_data_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tester/cpu/dut/rf/issue_wr_en_i">
+         <obj_property name="ElementShortName">issue_wr_en_i[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_wr_en_i[0:2]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group230">
@@ -251,22 +118,16 @@
    <wvobject type="group" fp_name="group272">
       <obj_property name="label">Issue</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/ifu/queue/data_out">
-         <obj_property name="ElementShortName">data_out[0:1][31:0]</obj_property>
-         <obj_property name="ObjectShortName">data_out[0:1][31:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/issue_op">
-         <obj_property name="ElementShortName">issue_op[0:1]</obj_property>
-         <obj_property name="ObjectShortName">issue_op[0:1]</obj_property>
+         <obj_property name="ElementShortName">issue_op[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_op[0:2]</obj_property>
          <wvobject type="array" fp_name="/tester/cpu/dut/issue_op[0]">
             <obj_property name="ElementShortName">[0]</obj_property>
             <obj_property name="ObjectShortName">[0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
             <wvobject type="array" fp_name="/tester/cpu/dut/issue_op[0].opcode">
                <obj_property name="ElementShortName">.opcode[6:0]</obj_property>
                <obj_property name="ObjectShortName">.opcode[6:0]</obj_property>
-               <obj_property name="Radix">BINARYRADIX</obj_property>
             </wvobject>
             <wvobject type="array" fp_name="/tester/cpu/dut/issue_op[0].encoding">
                <obj_property name="ElementShortName">.encoding[1:0]</obj_property>
@@ -295,49 +156,31 @@
             <wvobject type="array" fp_name="/tester/cpu/dut/issue_op[0].imm">
                <obj_property name="ElementShortName">.imm[11:0]</obj_property>
                <obj_property name="ObjectShortName">.imm[11:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
             </wvobject>
          </wvobject>
          <wvobject type="array" fp_name="/tester/cpu/dut/issue_op[1]">
             <obj_property name="ElementShortName">[1]</obj_property>
             <obj_property name="ObjectShortName">[1]</obj_property>
          </wvobject>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/ifu/rdy_cnt_o">
-         <obj_property name="ElementShortName">rdy_cnt_o[1:0]</obj_property>
-         <obj_property name="ObjectShortName">rdy_cnt_o[1:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/ifu/queue/ready_cnt">
-         <obj_property name="ElementShortName">ready_cnt[1:0]</obj_property>
-         <obj_property name="ObjectShortName">ready_cnt[1:0]</obj_property>
+         <wvobject type="array" fp_name="/tester/cpu/dut/issue_op[2]">
+            <obj_property name="ElementShortName">[2]</obj_property>
+            <obj_property name="ObjectShortName">[2]</obj_property>
+         </wvobject>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/issue_en">
-         <obj_property name="ElementShortName">issue_en[0:1]</obj_property>
-         <obj_property name="ObjectShortName">issue_en[0:1]</obj_property>
+         <obj_property name="ElementShortName">issue_en[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_en[0:2]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_rs">
-         <obj_property name="ElementShortName">issue_rs[0:1][1:0]</obj_property>
-         <obj_property name="ObjectShortName">issue_rs[0:1][1:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/poll_cnt">
-         <obj_property name="ElementShortName">poll_cnt[1:0]</obj_property>
-         <obj_property name="ObjectShortName">poll_cnt[1:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/ifu/queue/w_ptr">
-         <obj_property name="ElementShortName">w_ptr[2:0]</obj_property>
-         <obj_property name="ObjectShortName">w_ptr[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/ifu/queue/r_ptr">
-         <obj_property name="ElementShortName">r_ptr[2:0]</obj_property>
-         <obj_property name="ObjectShortName">r_ptr[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/tester/cpu/dut/issue_arbiter/ifu/queue/fifo">
-         <obj_property name="ElementShortName">fifo[0:7][31:0]</obj_property>
-         <obj_property name="ObjectShortName">fifo[0:7][31:0]</obj_property>
+      <wvobject type="array" fp_name="/tester/cpu/dut/issue_unit">
+         <obj_property name="ElementShortName">issue_unit[0:2][1:0]</obj_property>
+         <obj_property name="ObjectShortName">issue_unit[0:2][1:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group228">
       <obj_property name="label">Retire</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/tester/cpu/dut/retire_rs">
          <obj_property name="ElementShortName">retire_rs[1:0]</obj_property>
          <obj_property name="ObjectShortName">retire_rs[1:0]</obj_property>
@@ -353,7 +196,7 @@
       <wvobject type="array" fp_name="/tester/cpu/dut/bcast_value">
          <obj_property name="ElementShortName">bcast_value[63:0]</obj_property>
          <obj_property name="ObjectShortName">bcast_value[63:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/retirement_ready">
          <obj_property name="ElementShortName">retirement_ready[2:0]</obj_property>
@@ -443,9 +286,10 @@
    <wvobject type="group" fp_name="group569">
       <obj_property name="label">RF</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/tester/cpu/dut/rf/read_reg1_i">
-         <obj_property name="ElementShortName">read_reg1_i[0:1][4:0]</obj_property>
-         <obj_property name="ObjectShortName">read_reg1_i[0:1][4:0]</obj_property>
+         <obj_property name="ElementShortName">read_reg1_i[0:2][4:0]</obj_property>
+         <obj_property name="ObjectShortName">read_reg1_i[0:2][4:0]</obj_property>
          <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/rf/registers[18]">
@@ -453,21 +297,21 @@
          <obj_property name="ObjectShortName">[18]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/rf/read_reg2_i">
-         <obj_property name="ElementShortName">read_reg2_i[0:1][4:0]</obj_property>
-         <obj_property name="ObjectShortName">read_reg2_i[0:1][4:0]</obj_property>
+         <obj_property name="ElementShortName">read_reg2_i[0:2][4:0]</obj_property>
+         <obj_property name="ObjectShortName">read_reg2_i[0:2][4:0]</obj_property>
          <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/rf/issue_wr_en_i">
-         <obj_property name="ElementShortName">issue_wr_en_i[0:1]</obj_property>
-         <obj_property name="ObjectShortName">issue_wr_en_i[0:1]</obj_property>
+         <obj_property name="ElementShortName">issue_wr_en_i[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_wr_en_i[0:2]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/rf/issue_dst_i">
-         <obj_property name="ElementShortName">issue_dst_i[0:1][4:0]</obj_property>
-         <obj_property name="ObjectShortName">issue_dst_i[0:1][4:0]</obj_property>
+         <obj_property name="ElementShortName">issue_dst_i[0:2][4:0]</obj_property>
+         <obj_property name="ObjectShortName">issue_dst_i[0:2][4:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/tester/cpu/dut/rf/issue_rs_i">
-         <obj_property name="ElementShortName">issue_rs_i[0:1][1:0]</obj_property>
-         <obj_property name="ObjectShortName">issue_rs_i[0:1][1:0]</obj_property>
+         <obj_property name="ElementShortName">issue_rs_i[0:2][1:0]</obj_property>
+         <obj_property name="ObjectShortName">issue_rs_i[0:2][1:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/tester/cpu/behavioural/pc">
