@@ -1,28 +1,32 @@
 `timescale 1ns / 1ps
 import types::*;
 
-module register_file #(parameter DATA_WIDTH = 64) (
+module register_file #(parameter DATA_WIDTH = 64, MULTI_ISSUE = 3) (
 		input logic clk,
 		input logic rst,
 
-		input logic issue_wr_en_i,
-		input logic [4:0] issue_dst_i,
-		input e_functional_unit issue_rs_i,
+		input logic issue_wr_en_i[MULTI_ISSUE],
+		input logic [4:0] issue_dst_i[MULTI_ISSUE],
+		input e_functional_unit issue_rs_i[MULTI_ISSUE],
 
 		input logic bcast_valid_i,
 		input logic [DATA_WIDTH - 1:0] bcast_value_i,
 		input e_functional_unit bcast_rs_i,
 
-		input logic [4:0] read_reg1_i, read_reg2_i,
+		input logic [4:0] read_reg1_i[MULTI_ISSUE], read_reg2_i[MULTI_ISSUE],
 
-		output register read_value1_o, read_value2_o
+		output register read_value1_o[MULTI_ISSUE], read_value2_o[MULTI_ISSUE]
 	);
 
 	register registers [32];
-
-	assign read_value1_o = registers[read_reg1_i];
-	assign read_value2_o = registers[read_reg2_i];
-
+	
+	always_comb begin
+		for (int i = 0; i < MULTI_ISSUE; i++) begin
+			read_value1_o[i] = registers[read_reg1_i[i]];
+			read_value2_o[i] = registers[read_reg2_i[i]];
+		end
+	end
+	
 	always_ff @(posedge(clk)) begin
 		if (rst)
 			for (int i = 0; i < 32; i++) begin
@@ -39,10 +43,11 @@ module register_file #(parameter DATA_WIDTH = 64) (
 				end
 			end
 
-			if (issue_wr_en_i) begin
-				registers[issue_dst_i].is_virtual <= 1'b1;
-				registers[issue_dst_i].data.rs_id <= issue_rs_i;
-			end
+			for (int i = 0; i < MULTI_ISSUE; i++)
+				if (issue_wr_en_i[i]) begin
+					registers[issue_dst_i[i]].is_virtual <= 1'b1;
+					registers[issue_dst_i[i]].data.rs_id <= issue_rs_i[i];
+				end
 		end
 	end
 

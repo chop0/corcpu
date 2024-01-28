@@ -6,48 +6,64 @@
 //
 // Created : 31. Dec 2023 12:47 AM
 //-------------------------------------------------------------------
-module ifu #(parameter ADDRESS_WIDTH = 64) (
+module ifu #(parameter DATA_WIDTH = 64, MULTI_ISSUE = 3) (
 	input logic clk,
 	input logic rst,
 
-	input logic instruction_poll_i,
+	input logic [$clog2(MULTI_ISSUE):0] poll_cnt_i,
 
 	input logic bcast_valid_i,
-	input logic [ADDRESS_WIDTH-1:0] bcast_value_i,
+	input logic [DATA_WIDTH-1:0] bcast_value_i,
 	input e_functional_unit bcast_rs_i,
 
-	output logic fetch_ready_o,
-	output logic [31:0] fetch_insn_o,
+	output logic [$clog2(MULTI_ISSUE):0] rdy_cnt_o,
+	output operation_specification fetch_insns_o[MULTI_ISSUE],
+	output e_functional_unit fetch_rs_o [MULTI_ISSUE],
 
-	output logic [ADDRESS_WIDTH - 1:0] imem_load_addr_o,
+	output logic [DATA_WIDTH - 1:0] imem_load_addr_o,
 	output logic imem_load_en_o,
 	input logic [31:0] imem_load_insn_i,
 	input logic imem_load_busy_i,
 	input logic imem_load_rdy_i
 );
-	logic [ADDRESS_WIDTH - 1:0] insn_load_pc;
+	logic [DATA_WIDTH - 1:0] insn_load_pc;
 	logic branch_in_pipeline;
 
-	logic empty, full;
+	logic full;
 	logic queue_reset;
+	
+	logic [31:0] fetch_insns_undecoded [MULTI_ISSUE];
+	
+	genvar i;
+	generate;
+		for (i = 0; i < MULTI_ISSUE; i++) begin
+			instruction_decoder decoder (
+				.instruction ( fetch_insns_undecoded[i] ),
+				.op ( fetch_insns_o[i] ),
+				.rs_id ( fetch_rs_o[i] )
+			);
+		end
+	endgenerate;
 
-	synchronous_fifo #(8, 32) queue (
+	synchronous_fifo #(
+		.DEPTH ( 8 ), 
+		.DATA_WIDTH ( 32 ),
+		.MULTI_POP ( MULTI_ISSUE )
+	) queue (
 		.clk ( clk ),
 		.rst ( queue_reset ), // clear queue on branch
 
 		.push ( imem_load_rdy_i ),
-		.poll ( instruction_poll_i ),
+		.poll_cnt ( poll_cnt_i ),
 
 		.data_in ( imem_load_insn_i ),
-
-		.head ( fetch_insn_o ),
-		.tail ( ),
-		.empty ( empty ),
+		.data_out ( fetch_insns_undecoded ),
+		
+		.ready_cnt ( rdy_cnt_o ),
 		.full ( full )
 	);
 
 	assign queue_reset = rst || (bcast_valid_i && bcast_rs_i == BU);
-	assign fetch_ready_o = !rst && !empty && !queue_reset;
 
 	assign imem_load_addr_o = insn_load_pc;
     assign imem_load_en_o = !(branch_in_pipeline || full) && !imem_load_busy_i;

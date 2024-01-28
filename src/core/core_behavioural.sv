@@ -73,7 +73,7 @@ module core_behavioural #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64) (
 		for (int i = 0; i < 32; i++) registers[i] <= 0;
 	end
 
-	bit [31:0] insn;
+	logic [31:0] insn;
 	logic [DATA_WIDTH - 1:0] result;
 	
 	always_comb begin

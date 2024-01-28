@@ -5,50 +5,24 @@
    <db_ref_list>
       <db_ref path="tester_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_types_sv_3424453843 " />
             <top_module name="glbl" />
             <top_module name="tester" />
-            <top_module name="types" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="12.705 ns"></ZoomEndTime>
-      <Cursor1Time time="5.000 ns"></Cursor1Time>
+      <ZoomStartTime time="32.871 ns"></ZoomStartTime>
+      <ZoomEndTime time="59.426 ns"></ZoomEndTime>
+      <Cursor1Time time="35.775 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="253"></NameColumnWidth>
-      <ValueColumnWidth column_width="100"></ValueColumnWidth>
+      <ValueColumnWidth column_width="94"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="8" />
+   <WVObjectSize size="9" />
    <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/data_in">
       <obj_property name="ElementShortName">data_in[1:0]</obj_property>
       <obj_property name="ObjectShortName">data_in[1:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/dut/full">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">full</obj_property>
-      <obj_property name="ObjectShortName">full</obj_property>
-      <obj_property name="label">DUT Full</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/behavioural/full">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">full</obj_property>
-      <obj_property name="ObjectShortName">full</obj_property>
-      <obj_property name="label">behav full</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/dut/empty">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">empty</obj_property>
-      <obj_property name="ObjectShortName">empty</obj_property>
-      <obj_property name="label">dut empty</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/behavioural/empty">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">empty</obj_property>
-      <obj_property name="ObjectShortName">empty</obj_property>
-      <obj_property name="label">behav empty</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/rst">
       <obj_property name="ElementShortName">rst</obj_property>
@@ -61,5 +35,25 @@
    <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/en">
       <obj_property name="ElementShortName">en</obj_property>
       <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/push">
+      <obj_property name="ElementShortName">push</obj_property>
+      <obj_property name="ObjectShortName">push</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/data_in">
+      <obj_property name="ElementShortName">data_in[1:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/dut/poll_cnt">
+      <obj_property name="ElementShortName">poll_cnt[1:0]</obj_property>
+      <obj_property name="ObjectShortName">poll_cnt[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/dut/w_ptr">
+      <obj_property name="ElementShortName">w_ptr[1:0]</obj_property>
+      <obj_property name="ObjectShortName">w_ptr[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/dut/r_ptr">
+      <obj_property name="ElementShortName">r_ptr[1:0]</obj_property>
+      <obj_property name="ObjectShortName">r_ptr[1:0]</obj_property>
    </wvobject>
 </wave_config>

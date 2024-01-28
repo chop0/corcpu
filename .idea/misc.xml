@@ -3,4 +3,115 @@
     <option name="sdkName" value="Python 3.11" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11" project-jdk-type="Python SDK" />
+  <component name="SVCompilerDirectivesDefines">
+    <option name="define">
+      <map>
+        <entry key="GLBL">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="141" />
+                    <option name="source" value="glbl.v" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="I_TYPE_INSTRUCTION">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="828" />
+                    <option name="parameters">
+                      <list>
+                        <Parameter>
+                          <option name="name" value="NAME" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="OPCODE" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="FUNCT3" />
+                        </Parameter>
+                      </list>
+                    </option>
+                    <option name="replacementList" value="function [31:0] NAME(input [4:0] rd, rs1, input [11:0] imm); &#10;    begin &#10;        NAME = {imm, rs1, FUNCT3, rd, OPCODE}; &#10;    end &#10;endfunction" />
+                    <option name="source" value="util_encoder.sv" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="RS_ARGS">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="1950" />
+                    <option name="parameters">
+                      <list>
+                        <Parameter>
+                          <option name="name" value="RID" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="rop1" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="rop2" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="done" />
+                        </Parameter>
+                      </list>
+                    </option>
+                    <option name="replacementList" value="( &#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.clk(clk),&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.rst(rst),&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.issue_write_enable ( arbiter.issue_write_enable_units[RID] ),&#9;&#10;&#9;&#9;&#9;.issue_write ( arbiter.issue_write_units[RID] ),&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.read1 ( arbiter.read1_register_units[RID] ),&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.read2 ( arbiter.read2_register_units[RID] ),&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.read1_value ( rf.read1_value ),&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.read2_value ( rf.read2_value ),&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.inflight_check_register ( rf.read3_value ),&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.is_inflight ( rf.read3_value.is_virtual ),&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.inflight_rs ( rf.read3_value.data.rs_id ),&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;.cancellation_request_rs ( cancel_index ),&#9;&#9;&#9;&#9;&#9;&#9;\" />
+                    <option name="source" value="cpu.sv" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="R_TYPE_INSTRUCTION">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="30" />
+                    <option name="parameters">
+                      <list>
+                        <Parameter>
+                          <option name="name" value="NAME" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="OPCODE" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="FUNCT3" />
+                        </Parameter>
+                        <Parameter>
+                          <option name="name" value="FUNCT7" />
+                        </Parameter>
+                      </list>
+                    </option>
+                    <option name="replacementList" value="function [31:0] NAME(input [4:0] rd, rs1, rs2); &#10;    begin &#10;        NAME = {FUNCT7, rs2, rs1, FUNCT3, rd, OPCODE}; &#10;    end &#10;endfunction" />
+                    <option name="source" value="util_encoder.sv" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="version" value="195" />
+  </component>
 </project>

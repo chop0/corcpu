@@ -21,7 +21,7 @@
 
 // verilator lint_off PINMISSING
 module core_tb(input logic clk, input logic rst, input logic en);
-	logic [15:0] max_instructions;
+	logic [15:0] max_instructions, dut_cnt;
 
 	logic dut_done, behavioural_done;
 
@@ -36,17 +36,19 @@ module core_tb(input logic clk, input logic rst, input logic en);
     );
 
 	// verilator lint_off PINMISSING
-	core dut (
+	core #( .MULTI_ISSUE ( 3 ) ) dut (
 		.clk ( clk ),
 		.rst ( rst ),
 		.max_instructions_i ( max_instructions ),
 		.done_o ( dut_done )
 	);
 	
+	assign dut_cnt = dut.issued_instruction_cnt;
+	
 	core_behavioural behavioural (
 			.clk ( clk ),
 			.rst ( rst ),
-			.max_instructions_i ( max_instructions ),
+			.max_instructions_i ( dut_cnt ), // because we don't have a way to force the dut to serialize
 			.done_o ( behavioural_done )
 	);
 	// verilator lint_on PINMISSING
@@ -136,7 +138,7 @@ module core_tb(input logic clk, input logic rst, input logic en);
 				end
 
 				7'b1100011 : begin
-					automatic bit [11:0] imm = ($urandom % 128) * 4;
+					automatic bit [11:0] imm = $urandom_range(1, 128) * 4;
 					instruction[7] = imm[11];
 					instruction[11:8] = imm[4:1];
 					case ($urandom_range(0, 5))

@@ -6,7 +6,7 @@
 //-------------------------------------------------------------------
 import types::*;
 
-module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64) (
+module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 	input logic clk,
 	input logic rst,
 
@@ -33,14 +33,18 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64) (
 	output logic [FETCH_WIDTH - 1:0] dmem_wr_data_o
 );
 	logic [15:0]             issued_instruction_cnt;
-	logic                    issue_en;
-	logic                    issue_ifu_ready;
-	logic [31:0]             issue_insn;
-	logic                    issue_wr_en;
-	operation_specification  issue_op;
-	e_functional_unit        issue_rs;
-	register                 issue_read1_value;
-	register                 issue_read2_value;
+	
+	logic                    issue_en [MULTI_ISSUE];
+	logic [$clog2(MULTI_ISSUE):0] issue_cnt;
+	operation_specification  issue_op[MULTI_ISSUE];
+
+	logic                    issue_has_rd[MULTI_ISSUE];
+	logic [4:0]				 issue_rd [MULTI_ISSUE];
+	e_functional_unit        issue_rs[MULTI_ISSUE];
+	logic [4:0]				 issue_rs1[MULTI_ISSUE];
+	logic [4:0]				 issue_rs2[MULTI_ISSUE];	
+	register                 issue_read1_value[MULTI_ISSUE];
+	register                 issue_read2_value[MULTI_ISSUE];
 
 	e_functional_unit        retire_rs;
 	logic                    retire_en;
@@ -81,46 +85,53 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64) (
 	logic [63:0]             bu_rhs;
 	logic [63:0]             bu_result;
 
-	ifu #(DATA_WIDTH) ifu (
+	issue_arbiter #(
+		.DATA_WIDTH ( DATA_WIDTH ),
+		.FETCH_WIDTH ( FETCH_WIDTH ),
+		.MULTI_ISSUE ( MULTI_ISSUE )
+	) issue_arbiter (
 		.clk ( clk ),
 		.rst ( rst ),
-
-		.instruction_poll_i ( issue_en ),
-
+		
+		.stall_i ( issued_instruction_cnt >= max_instructions_i ),
+		
 		.bcast_valid_i ( bcast_valid ),
-		.bcast_rs_i ( retire_rs ),
 		.bcast_value_i ( bcast_value ),
-
-		.fetch_ready_o ( issue_ifu_ready ),
-		.fetch_insn_o ( issue_insn ),
-
-		.imem_load_addr_o ( imem_addr_o ),
-		.imem_load_en_o ( imem_rd_en_o ),
-		.imem_load_insn_i ( imem_rd_data_i[63:32] ),
-		.imem_load_busy_i ( imem_busy_i ),
-		.imem_load_rdy_i ( imem_rdy_i )
+		.bcast_rs_i ( retire_rs ),
+		
+		.units_busy_i ( station_busy ),
+		
+		.imem_busy_i ( imem_busy_i ),
+		.imem_rdy_i ( imem_rdy_i ),
+		.imem_rd_data_i ( imem_rd_data_i ),
+		
+		.imem_rd_en_o ( imem_rd_en_o ),
+		.imem_addr_o ( imem_addr_o ),
+		
+		.issue_en_o ( issue_en ),
+		.issue_rd_o ( issue_rd ),
+		.issue_has_rd_o ( issue_has_rd ),
+		.issue_ops_o ( issue_op ),
+		.issue_stations_o ( issue_rs )
 	);
-
-	instruction_decoder decoder (
-		.instruction ( issue_insn ),
-		.op ( issue_op ),
-		.rs_id ( issue_rs )
-	);
-
-	register_file rf (
+	
+	register_file #(
+		.DATA_WIDTH ( DATA_WIDTH ),
+		.MULTI_ISSUE ( MULTI_ISSUE )
+	) rf (
 		.clk ( clk ),
 		.rst ( rst ),
 
-		.issue_wr_en_i ( issue_wr_en ),
-		.issue_dst_i ( issue_op.rd ),
+		.issue_wr_en_i ( issue_has_rd ),
+		.issue_dst_i ( issue_rd ),
 		.issue_rs_i ( issue_rs ),
 
 		.bcast_valid_i ( bcast_valid ),
 		.bcast_rs_i ( retire_rs ),
 		.bcast_value_i ( bcast_value ),
 
-		.read_reg1_i ( issue_op.rs1 ),
-		.read_reg2_i ( issue_op.rs2 ),
+		.read_reg1_i ( issue_rs1 ),
+		.read_reg2_i ( issue_rs2 ),
 
 		.read_value1_o ( issue_read1_value ),
 		.read_value2_o ( issue_read2_value )
@@ -137,17 +148,32 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64) (
 	);
 
 	`define RESERVATION_STATION(MODULE_NAME, ID, UNIT_DONE, CURR_OP, R_OPER1, R_OPER2, OPER1, OPER2) \
+		logic issue_en_``ID;	\
+		operation_specification issue_op_spec_``ID;\
+		register issue_read1_value_``ID, issue_read2_value_``ID; \
+		always_comb begin \
+			issue_en_``ID = 1'b0; \
+			issue_op_spec_``ID = '{encoding: e_instruction_format'('X), default: 'X}; \
+			\
+			for (int i = 0; i < MULTI_ISSUE; i++) \
+				if (issue_en[i] && issue_rs[i] == ID) begin \
+					issue_en_``ID = 1'b1; \
+					issue_op_spec_``ID = issue_op[i]; \
+					issue_read1_value_``ID = issue_read1_value[i]; \
+					issue_read2_value_``ID = issue_read2_value[i]; \
+				end \
+		end \
 		reservation_station	#(DATA_WIDTH, ID) MODULE_NAME (                                          \
 			.clk ( clk ),                                                                            \
 			.rst ( rst ),                                                                            \
                                                                                                      \
-			.read1_value_i ( issue_read1_value ),                                                    \
-			.read2_value_i ( issue_read2_value ),                                                    \
+			.read1_value_i ( issue_read1_value_``ID ),                                                    \
+			.read2_value_i ( issue_read2_value_``ID ),                                                    \
                                                                                                      \
 			.busy_o ( station_busy[ID] ),                                                            \
                                                                                                      \
-			.issue_en_i ( issue_en && issue_rs == ID ),                                              \
-			.issue_op_i ( issue_op ),                                                                \
+			.issue_en_i ( issue_en_``ID ),                                              \
+			.issue_op_i ( issue_op_spec_``ID ),                                                                \
                                                                                                      \
 			.unit_done_i ( UNIT_DONE ),                                                              \
                                                                                                      \
@@ -230,12 +256,20 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64) (
 	assign unit_results[ALU] = alu_result;
 	assign unit_results[BU]  = bu_result;
 
-	assign issue_en = issue_ifu_ready && !station_busy[issue_rs] && (issued_instruction_cnt < max_instructions_i);
-	assign issue_wr_en = issue_en && has_rd(issue_op.encoding);
-
-	assign done_o = issued_instruction_cnt == max_instructions_i && station_busy == 'b0;
+	assign done_o = issued_instruction_cnt >= max_instructions_i && station_busy == 'b0;
+	
+	always_comb begin
+		issue_cnt = 0;
+		
+		for (int i = 0; i < MULTI_ISSUE; i++) begin
+			issue_rs1[i] = issue_op[i].rs1;
+			issue_rs2[i] = issue_op[i].rs2;
+			
+			if (issue_en[i]) issue_cnt++;
+		end
+	end
 
 	always_ff @ (posedge clk)
 		if (rst) issued_instruction_cnt <= 0;
-		else if (issue_en) issued_instruction_cnt <= issued_instruction_cnt + 1;
+		else issued_instruction_cnt <= issued_instruction_cnt + issue_cnt;
 endmodule : core

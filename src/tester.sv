@@ -49,8 +49,8 @@ module tester ();
 		.clk ( clk ),
 		.rst ( rst ),
 		.en ( en )
-	);/*
-	synchronous_fifo_tb synchronous_fifo_tb(
+	);
+	/*synchronous_fifo_tb synchronous_fifo_tb(
 		.clk ( clk ),
 		.rst ( rst ),
 		.en ( en )
