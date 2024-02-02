@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="cpu_entry_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_cpu_sv_2617914717 " />
+            <top_module name="cpu_entry" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="1,438.700 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,506.501 ns"></ZoomEndTime>
+      <Cursor1Time time="1,450.900 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="283"></NameColumnWidth>
+      <ValueColumnWidth column_width="337"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="24" />
+   <wvobject type="logic" fp_name="/cpu_entry/cache/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cpu_entry/cache/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/rf/registers">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">registers[0:31]</obj_property>
+      <obj_property name="ObjectShortName">registers[0:31]</obj_property>
+      <obj_property name="label">DUT registers</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group152">
+      <obj_property name="label">Imem</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/imem_rd_en_i">
+         <obj_property name="ElementShortName">imem_rd_en_i</obj_property>
+         <obj_property name="ObjectShortName">imem_rd_en_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/imem_addr_i">
+         <obj_property name="ElementShortName">imem_addr_i[63:0]</obj_property>
+         <obj_property name="ObjectShortName">imem_addr_i[63:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/imem_busy_o">
+         <obj_property name="ElementShortName">imem_busy_o</obj_property>
+         <obj_property name="ObjectShortName">imem_busy_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/imem_rdy_o">
+         <obj_property name="ElementShortName">imem_rdy_o</obj_property>
+         <obj_property name="ObjectShortName">imem_rdy_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/imem_state">
+         <obj_property name="ElementShortName">imem_state[31:0]</obj_property>
+         <obj_property name="ObjectShortName">imem_state[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/imem_rd_data_o">
+         <obj_property name="ElementShortName">imem_rd_data_o[31:0]</obj_property>
+         <obj_property name="ObjectShortName">imem_rd_data_o[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_wr_en_i">
+         <obj_property name="ElementShortName">issue_wr_en_i[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_wr_en_i[0:2]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group230">
+      <obj_property name="label">Dmem</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/dmem_rd_en_i">
+         <obj_property name="ElementShortName">dmem_rd_en_i</obj_property>
+         <obj_property name="ObjectShortName">dmem_rd_en_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/dmem_wr_en_i">
+         <obj_property name="ElementShortName">dmem_wr_en_i</obj_property>
+         <obj_property name="ObjectShortName">dmem_wr_en_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/dmem_addr_i">
+         <obj_property name="ElementShortName">dmem_addr_i[63:0]</obj_property>
+         <obj_property name="ObjectShortName">dmem_addr_i[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/dmem_busy_o">
+         <obj_property name="ElementShortName">dmem_busy_o</obj_property>
+         <obj_property name="ObjectShortName">dmem_busy_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/cache/dmem_rdy_o">
+         <obj_property name="ElementShortName">dmem_rdy_o</obj_property>
+         <obj_property name="ObjectShortName">dmem_rdy_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/dmem_rd_data_o">
+         <obj_property name="ElementShortName">dmem_rd_data_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">dmem_rd_data_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/dmem_state">
+         <obj_property name="ElementShortName">dmem_state[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dmem_state[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu/dmem_wr_data_o">
+         <obj_property name="ElementShortName">dmem_wr_data_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">dmem_wr_data_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/cache/dmem_wr_rem">
+         <obj_property name="ElementShortName">dmem_wr_rem[2:0]</obj_property>
+         <obj_property name="ObjectShortName">dmem_wr_rem[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/dmem_wr_size">
+         <obj_property name="ElementShortName">dmem_wr_size[2:0]</obj_property>
+         <obj_property name="ObjectShortName">dmem_wr_size[2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group272">
+      <obj_property name="label">Issue</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/cpu_entry/core/ifu/bcast_pc_rdy_i">
+         <obj_property name="ElementShortName">bcast_pc_rdy_i</obj_property>
+         <obj_property name="ObjectShortName">bcast_pc_rdy_i</obj_property>
+      </wvobject>
+      <wvobject type="group" fp_name="group159">
+         <obj_property name="label">fetch queue</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cpu_entry/core/ifu/queue/fifo">
+            <obj_property name="ElementShortName">fifo[0:7][31:0]</obj_property>
+            <obj_property name="ObjectShortName">fifo[0:7][31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu_entry/core/ifu/queue/w_ptr">
+            <obj_property name="ElementShortName">w_ptr[2:0]</obj_property>
+            <obj_property name="ObjectShortName">w_ptr[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu_entry/core/ifu/queue/r_ptr">
+            <obj_property name="ElementShortName">r_ptr[2:0]</obj_property>
+            <obj_property name="ObjectShortName">r_ptr[2:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu_entry/core/ifu/poll_cnt_i">
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="ElementShortName">poll_cnt_i[2:0]</obj_property>
+            <obj_property name="ObjectShortName">poll_cnt_i[2:0]</obj_property>
+            <obj_property name="label">poll_cnt_i</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu_entry/core/ifu/rdy_cnt_o">
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="ElementShortName">rdy_cnt_o[2:0]</obj_property>
+            <obj_property name="ObjectShortName">rdy_cnt_o[2:0]</obj_property>
+            <obj_property name="label">rdy_cnt_o</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/cpu_entry/core/ifu/bcast_pc_rdy_i">
+            <obj_property name="ElementShortName">bcast_pc_rdy_i</obj_property>
+            <obj_property name="ObjectShortName">bcast_pc_rdy_i</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/issue_op">
+         <obj_property name="ElementShortName">issue_op[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_op[0:2]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cpu_entry/core/issue_op[0]">
+            <obj_property name="ElementShortName">[0]</obj_property>
+            <obj_property name="ObjectShortName">[0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu_entry/core/issue_op[1]">
+            <obj_property name="ElementShortName">[1]</obj_property>
+            <obj_property name="ObjectShortName">[1]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu_entry/core/issue_op[2]">
+            <obj_property name="ElementShortName">[2]</obj_property>
+            <obj_property name="ObjectShortName">[2]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/issue_en">
+         <obj_property name="ElementShortName">issue_en[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_en[0:2]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/issue_unit">
+         <obj_property name="ElementShortName">issue_unit[0:2][2:0]</obj_property>
+         <obj_property name="ObjectShortName">issue_unit[0:2][2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cpu_entry/core/ifu/branch_in_pipeline">
+      <obj_property name="ElementShortName">branch_in_pipeline</obj_property>
+      <obj_property name="ObjectShortName">branch_in_pipeline</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_wr_en_i">
+      <obj_property name="ElementShortName">issue_wr_en_i[0:2]</obj_property>
+      <obj_property name="ObjectShortName">issue_wr_en_i[0:2]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_dst_i">
+      <obj_property name="ElementShortName">issue_dst_i[0:2][4:0]</obj_property>
+      <obj_property name="ObjectShortName">issue_dst_i[0:2][4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_rs_i">
+      <obj_property name="ElementShortName">issue_rs_i[0:2][2:0]</obj_property>
+      <obj_property name="ObjectShortName">issue_rs_i[0:2][2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cpu_entry/core/rf/bcast_valid_i">
+      <obj_property name="ElementShortName">bcast_valid_i</obj_property>
+      <obj_property name="ObjectShortName">bcast_valid_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/rf/bcast_value_i">
+      <obj_property name="ElementShortName">bcast_value_i[63:0]</obj_property>
+      <obj_property name="ObjectShortName">bcast_value_i[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/rf/bcast_rs_i">
+      <obj_property name="ElementShortName">bcast_rs_i[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bcast_rs_i[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/bu/sys_return_addr">
+      <obj_property name="ElementShortName">sys_return_addr[63:0]</obj_property>
+      <obj_property name="ObjectShortName">sys_return_addr[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group228">
+      <obj_property name="label">Retire</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/cpu_entry/core/retire_rs">
+         <obj_property name="ElementShortName">retire_rs[2:0]</obj_property>
+         <obj_property name="ObjectShortName">retire_rs[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/retire_en">
+         <obj_property name="ElementShortName">retire_en</obj_property>
+         <obj_property name="ObjectShortName">retire_en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bcast_valid">
+         <obj_property name="ElementShortName">bcast_valid</obj_property>
+         <obj_property name="ObjectShortName">bcast_valid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/bcast_value">
+         <obj_property name="ElementShortName">bcast_value[63:0]</obj_property>
+         <obj_property name="ObjectShortName">bcast_value[63:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/bu/result_pc">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">result_pc[63:0]</obj_property>
+         <obj_property name="ObjectShortName">result_pc[63:0]</obj_property>
+         <obj_property name="label">BU pc</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/retirement_ready">
+         <obj_property name="ElementShortName">retirement_ready[3:0]</obj_property>
+         <obj_property name="ObjectShortName">retirement_ready[3:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group286">
+      <obj_property name="label">ALU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/cpu_entry/core/alu/lhs">
+         <obj_property name="ElementShortName">lhs[63:0]</obj_property>
+         <obj_property name="ObjectShortName">lhs[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/alu/rhs">
+         <obj_property name="ElementShortName">rhs[63:0]</obj_property>
+         <obj_property name="ObjectShortName">rhs[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/alu/result">
+         <obj_property name="ElementShortName">result[63:0]</obj_property>
+         <obj_property name="ObjectShortName">result[63:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group695">
+      <obj_property name="label">LSU RS</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/cpu_entry/core/lsu_rs/resolved_op1_o">
+         <obj_property name="ElementShortName">resolved_op1_o</obj_property>
+         <obj_property name="ObjectShortName">resolved_op1_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/lsu_rs/resolved_op2_o">
+         <obj_property name="ElementShortName">resolved_op2_o</obj_property>
+         <obj_property name="ObjectShortName">resolved_op2_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/read1_value_i">
+         <obj_property name="ElementShortName">read1_value_i</obj_property>
+         <obj_property name="ObjectShortName">read1_value_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/read2_value_i">
+         <obj_property name="ElementShortName">read2_value_i</obj_property>
+         <obj_property name="ObjectShortName">read2_value_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/op1_value_o">
+         <obj_property name="ElementShortName">op1_value_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">op1_value_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/op2_value_o">
+         <obj_property name="ElementShortName">op2_value_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">op2_value_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/state">
+         <obj_property name="ElementShortName">state[31:0]</obj_property>
+         <obj_property name="ObjectShortName">state[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group217">
+      <obj_property name="label">LSU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu/state">
+         <obj_property name="ElementShortName">state[31:0]</obj_property>
+         <obj_property name="ObjectShortName">state[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu/store_data_i">
+         <obj_property name="ElementShortName">store_data_i[63:0]</obj_property>
+         <obj_property name="ObjectShortName">store_data_i[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/lsu/store_data_valid_i">
+         <obj_property name="ElementShortName">store_data_valid_i</obj_property>
+         <obj_property name="ObjectShortName">store_data_valid_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/op2_value_o">
+         <obj_property name="ElementShortName">op2_value_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">op2_value_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu/addr_i">
+         <obj_property name="ElementShortName">addr_i[63:0]</obj_property>
+         <obj_property name="ObjectShortName">addr_i[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu_rs/op1_value_o">
+         <obj_property name="ElementShortName">op1_value_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">op1_value_o[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/lsu/result_o">
+         <obj_property name="ElementShortName">result_o[63:0]</obj_property>
+         <obj_property name="ObjectShortName">result_o[63:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group569">
+      <obj_property name="label">RF</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/read_reg1_i">
+         <obj_property name="ElementShortName">read_reg1_i[0:2][4:0]</obj_property>
+         <obj_property name="ObjectShortName">read_reg1_i[0:2][4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/registers[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/read_reg2_i">
+         <obj_property name="ElementShortName">read_reg2_i[0:2][4:0]</obj_property>
+         <obj_property name="ObjectShortName">read_reg2_i[0:2][4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_wr_en_i">
+         <obj_property name="ElementShortName">issue_wr_en_i[0:2]</obj_property>
+         <obj_property name="ObjectShortName">issue_wr_en_i[0:2]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_dst_i">
+         <obj_property name="ElementShortName">issue_dst_i[0:2][4:0]</obj_property>
+         <obj_property name="ObjectShortName">issue_dst_i[0:2][4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/rf/issue_rs_i">
+         <obj_property name="ElementShortName">issue_rs_i[0:2][2:0]</obj_property>
+         <obj_property name="ObjectShortName">issue_rs_i[0:2][2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group408">
+      <obj_property name="label">PU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/cpu_entry/core/pu/done_o">
+         <obj_property name="ElementShortName">done_o</obj_property>
+         <obj_property name="ObjectShortName">done_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/pu/cpl_o">
+         <obj_property name="ElementShortName">cpl_o[31:0]</obj_property>
+         <obj_property name="ObjectShortName">cpl_o[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group453">
+      <obj_property name="label">BU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu_rs/busy_o">
+         <obj_property name="ElementShortName">busy_o</obj_property>
+         <obj_property name="ObjectShortName">busy_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/bu/op_spec">
+         <obj_property name="ElementShortName">op_spec</obj_property>
+         <obj_property name="ObjectShortName">op_spec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu/result_pc_valid">
+         <obj_property name="ElementShortName">result_pc_valid</obj_property>
+         <obj_property name="ObjectShortName">result_pc_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu/result_rd_valid">
+         <obj_property name="ElementShortName">result_rd_valid</obj_property>
+         <obj_property name="ObjectShortName">result_rd_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu/lhs_valid">
+         <obj_property name="ElementShortName">lhs_valid</obj_property>
+         <obj_property name="ObjectShortName">lhs_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu/rhs_valid">
+         <obj_property name="ElementShortName">rhs_valid</obj_property>
+         <obj_property name="ObjectShortName">rhs_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu/retire">
+         <obj_property name="ElementShortName">retire</obj_property>
+         <obj_property name="ObjectShortName">retire</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_entry/core/bu/done_o">
+         <obj_property name="ElementShortName">done_o</obj_property>
+         <obj_property name="ObjectShortName">done_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_entry/core/bu/sys_return_addr">
+         <obj_property name="ElementShortName">sys_return_addr[63:0]</obj_property>
+         <obj_property name="ObjectShortName">sys_return_addr[63:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/bu/pc">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">pc[63:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[63:0]</obj_property>
+      <obj_property name="label">PC dut</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/issued_instruction_cnt">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">issued_instruction_cnt[15:0]</obj_property>
+      <obj_property name="ObjectShortName">issued_instruction_cnt[15:0]</obj_property>
+      <obj_property name="label">cnt dut</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_entry/core/dmem_addr_o">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dmem_addr_o[63:0]</obj_property>
+      <obj_property name="ObjectShortName">dmem_addr_o[63:0]</obj_property>
+      <obj_property name="label">dmem_addr_o[63:0] dut</obj_property>
+   </wvobject>
+</wave_config>
