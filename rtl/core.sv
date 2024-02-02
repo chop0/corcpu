@@ -93,6 +93,14 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 	logic [63:0]             pu_result;
 	enum { USER, SUPERVISOR } cpl;
 	
+	logic                    iou_rop1;
+	logic                    iou_rop2;
+	logic                    iou_done;
+	op_t  iou_curr_op;
+	logic [63:0]             iou_op1;
+	logic [63:0]             iou_op2;
+	logic [63:0]             iou_result;
+	
 	ifu #(
 		.DATA_WIDTH ( DATA_WIDTH ), 
 		.MULTI_ISSUE ( MULTI_ISSUE )
@@ -309,6 +317,20 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 		.cpl_o ( cpl )
 	);
 	
+	`RESERVATION_STATION(iou_rs, IOU, iou_done, iou_curr_op, iou_rop1, iou_rop2, iou_op1, iou_op2)
+	io_unit #(
+		.DATA_WIDTH ( DATA_WIDTH )
+	) iou (
+		.clk ( clk ),
+		.rst ( rst ),
+		
+		.retire_i ( retire_en && retire_rs == IOU ),
+		.op_spec_i ( iou_curr_op ),
+		.done_o ( iou_done ),
+		
+		.cpl_i ( cpl )
+	);
+	
 	
 	assign done_o = issued_instruction_cnt >= max_instructions_i && station_busy == 'b0;
 
@@ -316,6 +338,7 @@ module core #(parameter DATA_WIDTH = 64, FETCH_WIDTH = 64, MULTI_ISSUE = 2) (
 	assign unit_results[ALU] = alu_result;
 	assign unit_results[BU]  = bu_result;
 	assign unit_results[PU]  = pu_result;
+	assign unit_results[IOU]  = iou_result;
 	
 	assign issue_op = fetch_queue_ops;
 	assign issue_unit = fetch_queue_units;

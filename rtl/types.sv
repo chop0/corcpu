@@ -20,9 +20,9 @@ typedef enum logic [2:0] {
 `define INSN_FMT_CNT 6
 
 typedef enum logic [2:0]{
-    BU, ALU, LSU, PU //, IOU
+    BU, ALU, LSU, IOU, PU
 } e_functional_unit;
-`define FU_CNT 4
+`define FU_CNT 5
 
 typedef struct {
     e_instruction_format encoding;

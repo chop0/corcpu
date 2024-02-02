@@ -16,6 +16,7 @@ int main() {
 	asm volatile (".byte 0b00110100, 0, 0b101, 0");
 
 	for (int i = 0; i < 10; i++);
+	asm volatile (".byte 0b1110001, 0, 0, 0");
 
 	int n = 0;
 	set_priv(&n);
