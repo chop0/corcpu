@@ -22,16 +22,16 @@ module synchronous_fifo #(parameter DEPTH=8, DATA_WIDTH=8, MULTI_POP = 1) (
 		r_ptr <= 0;
 	end
 
-	always_ff @(posedge clk) if (!rst) begin
-		assert(!push || r_ptr != (w_ptr + 1'b1));
-		assert(poll_cnt <= ready_cnt);
-	
-		if(push) begin
+	always_ff @(posedge clk) if (!rst) begin	
+		if(push && r_ptr != (w_ptr + 1'b1)) begin
 			fifo[w_ptr] <= data_in;
 			w_ptr <= w_ptr + 1;
 		end
 
-		r_ptr <= r_ptr + poll_cnt;
+		if (poll_cnt > ready_cnt)
+			r_ptr <= r_ptr + ready_cnt;
+		else
+			r_ptr <= r_ptr + poll_cnt;
 	end
 
 	logic [$clog2(DEPTH):0] size;

@@ -3,75 +3,63 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tester_behav.wdb" id="1">
+      <db_ref path="synchronous_fifo_top_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_types_sv_3424453843 " />
             <top_module name="glbl" />
-            <top_module name="tester" />
-            <top_module name="types" />
+            <top_module name="std" />
+            <top_module name="synchronous_fifo_top" />
+            <top_module name="uvm_pkg" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="4,992 ps"></ZoomStartTime>
-      <ZoomEndTime time="5,002 ps"></ZoomEndTime>
-      <Cursor1Time time="5,000 ps"></Cursor1Time>
+      <ZoomStartTime time="149,994 ps"></ZoomStartTime>
+      <ZoomEndTime time="149,998 ps"></ZoomEndTime>
+      <Cursor1Time time="150,000 ps"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="253"></NameColumnWidth>
-      <ValueColumnWidth column_width="94"></ValueColumnWidth>
+      <NameColumnWidth column_width="283"></NameColumnWidth>
+      <ValueColumnWidth column_width="331"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="10" />
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/clk">
+   <wvobject type="array" fp_name="/synchronous_fifo_top/DATA_WIDTH">
+      <obj_property name="ElementShortName">DATA_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/synchronous_fifo_top/QUEUE_DEPTH">
+      <obj_property name="ElementShortName">QUEUE_DEPTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">QUEUE_DEPTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/synchronous_fifo_top/MULTI_POP">
+      <obj_property name="ElementShortName">MULTI_POP[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MULTI_POP[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/synchronous_fifo_top/sfi/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/rst">
+   <wvobject type="logic" fp_name="/synchronous_fifo_top/sfi/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/push">
-      <obj_property name="DisplayName">label</obj_property>
+   <wvobject type="logic" fp_name="/synchronous_fifo_top/sfi/push">
       <obj_property name="ElementShortName">push</obj_property>
       <obj_property name="ObjectShortName">push</obj_property>
-      <obj_property name="label">Push</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/poll">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">poll</obj_property>
-      <obj_property name="ObjectShortName">poll</obj_property>
-      <obj_property name="label">Poll</obj_property>
+   <wvobject type="array" fp_name="/synchronous_fifo_top/sfi/data_in">
+      <obj_property name="ElementShortName">data_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/data_in">
-      <obj_property name="ElementShortName">data_in[1:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in[1:0]</obj_property>
+   <wvobject type="array" fp_name="/synchronous_fifo_top/sfi/data_out">
+      <obj_property name="ElementShortName">data_out[0:2][7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[0:2][7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/dut/head">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">head[1:0]</obj_property>
-      <obj_property name="ObjectShortName">head[1:0]</obj_property>
-      <obj_property name="label">DUT head</obj_property>
+   <wvobject type="logic" fp_name="/synchronous_fifo_top/sfi/full">
+      <obj_property name="ElementShortName">full</obj_property>
+      <obj_property name="ObjectShortName">full</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/behavioural/head">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">head[1:0]</obj_property>
-      <obj_property name="ObjectShortName">head[1:0]</obj_property>
-      <obj_property name="label">Behav. head</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/dut/tail">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">tail[1:0]</obj_property>
-      <obj_property name="ObjectShortName">tail[1:0]</obj_property>
-      <obj_property name="label">DUT tail</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tester/synchronous_fifo_tb/behavioural/tail">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">tail[1:0]</obj_property>
-      <obj_property name="ObjectShortName">tail[1:0]</obj_property>
-      <obj_property name="label">Behav. tail</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tester/synchronous_fifo_tb/en">
-      <obj_property name="ElementShortName">en</obj_property>
-      <obj_property name="ObjectShortName">en</obj_property>
+   <wvobject type="array" fp_name="/synchronous_fifo_top/sfi/ready_cnt">
+      <obj_property name="ElementShortName">ready_cnt[2:0]</obj_property>
+      <obj_property name="ObjectShortName">ready_cnt[2:0]</obj_property>
    </wvobject>
 </wave_config>

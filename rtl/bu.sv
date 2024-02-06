@@ -18,9 +18,7 @@ module bu #(parameter DATA_WIDTH = 64) (
 
 	output logic [DATA_WIDTH-1:0] result_pc, result_rd,
 	output logic result_pc_valid, result_rd_valid,
-	
-	input enum { USER, SUPERVISOR } cpl_i,
-	
+		
 	output logic done_o
 );
 	logic [DATA_WIDTH - 1:0] sys_return_addr;
